@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CenturyClub from './CenturyClub';
+import Button from './Button';
 import Adapter from 'enzyme-adapter-react-16';
 
 import { shallow, configure } from 'enzyme';
@@ -19,8 +20,9 @@ describe('CenturyClub', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('contains a h1', () => {
-    const titleElement = wrapper.find('h1');
-    expect(titleElement.exists()).toEqual(true);
+  it('contains a start button', () => {
+    const wrapper = shallow(<CenturyClub />);
+    const button = wrapper.find(Button);
+    expect(button.props().text).toEqual('Start');
   });
 });
