@@ -20,7 +20,7 @@ describe('Button', () => {
 
   it('fires onclick callback', () => {
     const clickHandler = jest.fn();
-    const wrapper = shallow(<Button handleClick={clickHandler} />);
+    const wrapper = shallow(<Button onClick={clickHandler} />);
     wrapper.find('button').simulate('click');
     expect(clickHandler).toHaveBeenCalled();
   });
