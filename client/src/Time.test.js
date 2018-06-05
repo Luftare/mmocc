@@ -13,8 +13,13 @@ describe('Time', () => {
     expect(wrapper.exists()).toEqual(true);
   });
 
-  it('renders minutes from milliseconds', () => {
-    const wrapper = shallow(<Time milliseconds={60000} />);
-    expect(wrapper.text()).toEqual('1 min');
+  it('renders minutes and seconds from milliseconds', () => {
+    const wrapper = shallow(<Time milliseconds={75000} />);
+    expect(wrapper.text()).toEqual('1 min 15 sec');
+  });
+
+  it('renders minutes and seconds from milliseconds that add up to less than a minute', () => {
+    const wrapper = shallow(<Time milliseconds={55000} />);
+    expect(wrapper.text()).toEqual('0 min 55 sec');
   });
 });

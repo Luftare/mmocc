@@ -6,7 +6,9 @@ class CenturyClub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      intervalId: null
+      intervalId: null,
+      remainingTime: 6000000,
+      startTime: 0
     };
   }
 
@@ -23,8 +25,9 @@ class CenturyClub extends Component {
   };
 
   startTimer = () => {
-    const intervalId = setInterval(this.loop, 1000);
-    this.setState({ intervalId });
+    const currentTime = Date.now();
+    const intervalId = setInterval(this.loop, 100);
+    this.setState({ intervalId, startTime: currentTime });
   };
 
   stopTimer = () => {
@@ -33,7 +36,10 @@ class CenturyClub extends Component {
   };
 
   loop = () => {
-    console.log('Hep!');
+    const currentTime = Date.now();
+    const passedTime = currentTime - this.state.startTime;
+    const remainingTime = 6000000 - passedTime;
+    this.setState({ remainingTime });
   };
 
   render() {
@@ -42,7 +48,7 @@ class CenturyClub extends Component {
       <div>
         <h1>shiii</h1>
         <Button text={buttonText} onClick={this.handleStartStopButtonClick} />
-        <Time milliseconds={6000000} />
+        <Time milliseconds={this.state.remainingTime} />
       </div>
     );
   }

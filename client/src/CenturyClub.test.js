@@ -39,9 +39,11 @@ describe('CenturyClub', () => {
       button.simulate('click');
     });
 
+    // TODO: Timer functionality is not tested
+
     it('starts the timer', () => {
       expect(setInterval).toHaveBeenCalledTimes(1);
-      expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+      expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 100);
     });
 
     it('sets the button\'s text to "Give up"', () => {
