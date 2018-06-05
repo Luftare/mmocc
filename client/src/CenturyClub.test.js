@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import CenturyClub from './CenturyClub';
 import Button from './Button';
 import Time from './Time';
+import Bottles from './Bottles';
 import Adapter from 'enzyme-adapter-react-16';
 
 import { configure, mount } from 'enzyme';
@@ -29,6 +30,11 @@ describe('CenturyClub', () => {
     const time = wrapper.find(Time);
     expect(time.props().milliseconds).toEqual(6000000);
   });
+
+  it('contains a Bottle component with 12 bottles', () => {
+    const bottles = wrapper.find(Bottles);
+    expect(bottles.props().bottles).toEqual(12);
+  })
 
   describe('clicking on the button once', () => {
     let button;

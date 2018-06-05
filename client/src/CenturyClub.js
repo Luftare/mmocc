@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import Time from './Time';
+import Bottles from './Bottles';
 
 class CenturyClub extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class CenturyClub extends Component {
     this.state = {
       intervalId: null,
       remainingTime: 6000000,
-      startTime: 0
+      startTime: 0,
+      remainingSeconds: 6000
     };
   }
 
@@ -39,7 +41,10 @@ class CenturyClub extends Component {
     const currentTime = Date.now();
     const passedTime = currentTime - this.state.startTime;
     const remainingTime = 6000000 - passedTime;
-    this.setState({ remainingTime });
+    const remainingSeconds = Math.floor(remainingTime / 1000);
+    if (remainingSeconds < this.state.remainingSeconds) {
+      this.setState({ remainingTime, remainingSeconds });
+    }
   };
 
   render() {
@@ -49,6 +54,7 @@ class CenturyClub extends Component {
         <h1>shiii</h1>
         <Button text={buttonText} onClick={this.handleStartStopButtonClick} />
         <Time milliseconds={this.state.remainingTime} />
+        <Bottles bottles={12} remainingSeconds={this.state.remainingSeconds} />
       </div>
     );
   }
