@@ -11,6 +11,7 @@ configure({ adapter: new Adapter() });
 
 describe('CenturyClub', () => {
   let wrapper;
+
   beforeEach(() => {
     wrapper = mount(<CenturyClub />);
   });
@@ -30,9 +31,12 @@ describe('CenturyClub', () => {
   });
 
   describe('clicking on the button once', () => {
+    let button;
+
     beforeEach(() => {
       jest.useFakeTimers();
-      wrapper.find(Button).simulate('click');
+      button = wrapper.find(Button); 
+      button.simulate('click');
     });
 
     it('starts the timer', () => {
@@ -41,17 +45,21 @@ describe('CenturyClub', () => {
     });
 
     it('sets the button\'s text to "Give up"', () => {
-      expect(wrapper.find(Button).text()).toEqual('Give up');
+      expect(button.text()).toEqual('Give up');
     });
 
     describe('clicking button a second time', () => {
       beforeEach(() => {
-        wrapper.find(Button).simulate('click');
+        button.simulate('click');
       });
 
       it('stops the timer', () => {
         expect(clearInterval).toHaveBeenCalledTimes(1);
       });
+
+      it('changes the button text to "Start"', () => {
+        expect(button.text()).toEqual('Start');
+      })
     });
   });
 });
