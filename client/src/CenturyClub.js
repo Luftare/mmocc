@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import Button from './Button';
 import Time from './Time';
 import Bottles from './Bottles';
+import SecondCounter from './SecondCounter';
 
 class CenturyClub extends Component {
   constructor(props) {
     super(props);
+    this.secondCounter = new SecondCounter(this.handleTick.bind(this));
     this.state = {
-      intervalId: null,
-      remainingTime: 6000000,
-      startTime: 0,
-      remainingSeconds: 6000
+      remainingSeconds: 6000,
+      timerIsActive: false
     };
   }
 
+  handleTick(passedSeconds) {
+    this.setState({ remainingSeconds: 6000 - passedSeconds });
+  }
+
   timerIsActive = () => {
-    return !(this.state.intervalId == null);
+    return this.state.timerIsActive;
   };
 
   handleStartStopButtonClick = () => {
@@ -27,24 +31,13 @@ class CenturyClub extends Component {
   };
 
   startTimer = () => {
-    const currentTime = Date.now();
-    const intervalId = setInterval(this.loop, 100);
-    this.setState({ intervalId, startTime: currentTime });
+    this.secondCounter.start();
+    this.setState({ timerIsActive: true });
   };
 
   stopTimer = () => {
-    clearInterval(this.state.intervalId);
-    this.setState({ intervalId: null });
-  };
-
-  loop = () => {
-    const currentTime = Date.now();
-    const passedTime = currentTime - this.state.startTime;
-    const remainingTime = 6000000 - passedTime;
-    const remainingSeconds = Math.floor(remainingTime / 1000);
-    if (remainingSeconds < this.state.remainingSeconds) {
-      this.setState({ remainingTime, remainingSeconds });
-    }
+    this.secondCounter.stop();
+    this.setState({ timerIsActive: false });
   };
 
   render() {
@@ -53,7 +46,7 @@ class CenturyClub extends Component {
       <div>
         <h1>shiii</h1>
         <Button text={buttonText} onClick={this.handleStartStopButtonClick} />
-        <Time milliseconds={this.state.remainingTime} />
+        <Time seconds={this.state.remainingSeconds} />
         <Bottles bottles={12} remainingSeconds={this.state.remainingSeconds} />
       </div>
     );
