@@ -11,9 +11,4 @@ describe('Bottle', () => {
     const wrapper = shallow(<Bottle />);
     expect(wrapper.exists()).toEqual(true);
   });
-
-  it('renders how much liquid is left', () => {
-    const wrapper = shallow(<Bottle amountLeft={0.5} />);
-    expect(wrapper.text()).toEqual('50 %');
-  });
 });

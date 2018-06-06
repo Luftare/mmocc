@@ -18,28 +18,25 @@ describe('Bottles', () => {
     expect(wrapper.find(Bottle).length).toEqual(5);
   });
 
-  it('renders renders full bottles when 100 minutes is left', () => {
-    const wrapper = mount(<Bottles bottles={12} remainingSeconds={6000} />);
-    wrapper.find(Bottle).forEach((bottle) => {
-      expect(bottle.text()).toEqual('100 %');
-    });
+  it('bottles are full when no time has passed', () => {
+    const wrapper = mount(<Bottles bottles={2} remainingSeconds={6000} />);
+    const bottles = wrapper.find(Bottle);
+    expect(bottles.at(0).props().amountLeft).toEqual(1);
+    expect(bottles.at(1).props().amountLeft).toEqual(1);
   });
 
-  it('renders renders empty bottles when 0 minutes is left', () => {
-    const wrapper = mount(<Bottles bottles={12} remainingSeconds={0} />);
-    wrapper.find(Bottle).forEach((bottle) => {
-      expect(bottle.text()).toEqual('0 %');
-    });
+  it('no beer left when time is over', () => {
+    const wrapper = mount(<Bottles bottles={2} remainingSeconds={0} />);
+    const bottles = wrapper.find(Bottle);
+    expect(bottles.at(0).props().amountLeft).toEqual(0);
+    expect(bottles.at(1).props().amountLeft).toEqual(0);
   });
 
-  it('renders half of the bottles empty when 50 minutes is left', () => {
-    const wrapper = mount(<Bottles bottles={12} remainingSeconds={3000} />);
-    wrapper.find(Bottle).forEach((bottle, index) => {
-      if (index < 6) {
-        expect(bottle.text()).toEqual('100 %');
-      } else {
-        expect(bottle.text()).toEqual('0 %');
-      }
-    });
+  it('half of the amount is consumed when 50 minutes is left', () => {
+    const wrapper = mount(<Bottles bottles={3} remainingSeconds={3000} />);
+    const bottles = wrapper.find(Bottle);
+    expect(bottles.at(0).props().amountLeft).toEqual(1);
+    expect(bottles.at(1).props().amountLeft).toEqual(0.5);
+    expect(bottles.at(2).props().amountLeft).toEqual(0);
   });
 });

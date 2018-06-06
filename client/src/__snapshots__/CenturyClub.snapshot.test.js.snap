@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CenturyClub snapshot renders correnctly 1`] = `
+<div>
+  <h1>
+    shiii
+  </h1>
+  <button
+    onClick={[Function]}
+  >
+    Start
+  </button>
+  <div>
+    100
+     min 
+    0
+     sec
+  </div>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+  <span>
+    100
+     %
+  </span>
+</div>
+`;
